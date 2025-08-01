@@ -11,7 +11,8 @@
     "dev": "nodemon server.js",
     "build": "echo \"No build step required\"",
     "check-deploy": "node check-deploy.js",
-    "deploy-prep": "npm run check-deploy && echo \"✅ Listo para deploy - ejecuta: git add . && git commit -m 'Deploy ready' && git push\""
+    "deploy-prep": "npm run check-deploy && echo \"✅ Listo para deploy - ejecuta: git add . && git commit -m 'Deploy ready' && git push\"",
+    "quick-deploy": "node quick-deploy.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

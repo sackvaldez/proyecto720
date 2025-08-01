@@ -12,6 +12,11 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Configurar trust proxy para Render
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 // Configuración de seguridad
 app.use(helmet({
     contentSecurityPolicy: {
@@ -38,7 +43,15 @@ const loginLimiter = rateLimit({
 const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutos
     max: 100, // máximo 100 requests por IP
-    message: { error: 'Demasiadas solicitudes. Intenta de nuevo más tarde.' }
+    message: { error: 'Demasiadas solicitudes. Intenta de nuevo más tarde.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+    // Configuración para proxies en producción
+    ...(process.env.NODE_ENV === 'production' && {
+        validate: {
+            xForwardedForHeader: false // Deshabilitar validación en producción
+        }
+    })
 });
 
 // CORS configuración
