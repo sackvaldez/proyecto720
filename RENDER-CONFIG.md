@@ -122,6 +122,17 @@ Render automáticamente agrega:
 
 ## 🆘 Troubleshooting común
 
+### ❌ Error de login (X-Forwarded-For)
+```bash
+# Error en logs:
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false
+
+# Solución aplicada:
+- app.set('trust proxy', 1) en producción
+- Validación xForwardedForHeader deshabilitada
+- Deploy automático con fix incluido
+```
+
 ### Build falla:
 ```bash
 # Verificar en logs:

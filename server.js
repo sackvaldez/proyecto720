@@ -105,23 +105,33 @@ function validatePath(userPath, basePath) {
 }
 
 // Base de datos simulada de clientes (en producción usar una base de datos real)
-const clients = {
-    'admin': {
+const clients = {};
+
+// Credenciales de prueba (solo para desarrollo)
+if (process.env.NODE_ENV !== 'production') {
+    clients['admin'] = {
         password: bcrypt.hashSync('admin123', 10),
         isAdmin: true,
         name: 'Administrador'
-    },
-    'cliente1': {
+    };
+    clients['cliente1'] = {
         password: bcrypt.hashSync('pass123', 10),
         isAdmin: false,
         name: 'Cliente Ejemplo 1'
-    },
-    'cliente2': {
+    };
+    clients['cliente2'] = {
         password: bcrypt.hashSync('pass456', 10),
         isAdmin: false,
         name: 'Cliente Ejemplo 2'
-    }
-};
+    };
+} else {
+    // En producción, crear solo usuario admin por defecto
+    clients['admin'] = {
+        password: bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'admin123', 10),
+        isAdmin: true,
+        name: 'Administrador'
+    };
+}
 
 // Configuración de multer para subida de archivos
 const storage = multer.diskStorage({
@@ -591,10 +601,16 @@ try {
 
 app.listen(PORT, () => {
     console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
-    console.log('Credenciales de prueba:');
-    console.log('Admin: admin / admin123');
-    console.log('Cliente 1: cliente1 / pass123');
-    console.log('Cliente 2: cliente2 / pass456');
+    
+    if (process.env.NODE_ENV !== 'production') {
+        console.log('Credenciales de prueba (desarrollo):');
+        console.log('Admin: admin / admin123');
+        console.log('Cliente 1: cliente1 / pass123');
+        console.log('Cliente 2: cliente2 / pass456');
+    } else {
+        console.log('Servidor en modo producción');
+        console.log('IMPORTANTE: Asegúrate de cambiar las credenciales por defecto');
+    }
 });
 
 module.exports = app;
