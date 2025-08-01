@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración - Caballero Solutions Power</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1e3c72;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .upload-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .upload-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select, input[type="file"] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        select:focus, input[type="file"]:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        .file-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2a5298;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .clients-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .clients-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .files-viewer {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            display: none;
+        }
+
+        .files-viewer h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .year-container {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .year-header {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .year-header:hover {
+            background: #2a5298;
+        }
+
+        .year-content {
+            display: none;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .year-content.active {
+            display: block;
+        }
+
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .month-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .month-card h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .file-item:hover {
+            background: #f8f9fa;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+
+        .file-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+        }
+
+        .delete-file-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-file-btn:hover {
+            background: #c82333;
+        }
+
+        .delete-file-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .close-viewer {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 20px;
+        }
+
+        .client-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .client-info h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .client-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .view-files-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .user-management-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .create-user-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .users-list-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .user-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .user-info p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .user-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .user-type.admin {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .user-type.client {
+            background: #3498db;
+            color: white;
+        }
+
+        .delete-user-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .delete-user-btn:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width: 1024px) {
+            .months-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .client-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .user-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .file-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 15px 10px;
+            }
+
+            .file-actions {
+                width: 100%;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .download-btn,
+            .delete-file-btn {
+                flex: 1;
+                text-align: center;
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 0;
+            }
+
+            .months-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .file-name {
+                word-break: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .upload-section,
+            .clients-section,
+            .files-viewer,
+            .user-management-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .months-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .file-item {
+                padding: 12px 8px;
+            }
+
+            .file-name {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .file-date {
+                font-size: 11px;
+            }
+
+            .year-header {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .month-card h4 {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .file-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .download-btn,
+            .delete-file-btn {
+                width: 100%;
+                flex: none;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .month-card {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 10px 15px;
+            }
+
+            .header h1 {
+                font-size: 16px;
+            }
+
+            .logout-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Panel de Administración - Caballero Solutions Power</h1>
+        <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
+
+    <div class="container">
+        <div class="upload-section">
+            <h2>Subir Archivo</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientId">Cliente:</label>
+                        <select id="clientId" name="clientId" required>
+                            <option value="">Seleccionar cliente...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="year">Año:</label>
+                        <select id="year" name="year" required>
+                            <option value="">Seleccionar año...</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="month">Mes:</label>
+                        <select id="month" name="month" required>
+                            <option value="">Seleccionar mes...</option>
+                            <option value="enero">Enero</option>
+                            <option value="febrero">Febrero</option>
+                            <option value="marzo">Marzo</option>
+                            <option value="abril">Abril</option>
+                            <option value="mayo">Mayo</option>
+                            <option value="junio">Junio</option>
+                            <option value="julio">Julio</option>
+                            <option value="agosto">Agosto</option>
+                            <option value="septiembre">Septiembre</option>
+                            <option value="octubre">Octubre</option>
+                            <option value="noviembre">Noviembre</option>
+                            <option value="diciembre">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="file">Archivo PDF:</label>
+                    <input type="file" id="file" name="file" accept=".pdf" required>
+                </div>
+                
+                <div class="file-info">
+                    <strong>Información:</strong>
+                    <ul>
+                        <li>Solo se permiten archivos PDF</li>
+                        <li>Tamaño máximo: 200MB</li>
+                        <li>Tipos de documentos: Pólizas, Análisis de aceites, Termografías</li>
+                    </ul>
+                </div>
+                
+                <button type="submit" class="btn" id="uploadBtn">Subir Archivo</button>
+                
+                <div class="loading" id="loading">
+                    Subiendo archivo...
+                </div>
+                
+                <div id="message"></div>
+            </form>
+        </div>
+
+        <div class="clients-section">
+            <h2>Clientes Registrados</h2>
+            <div id="clientsList">
+                <div class="loading">Cargando clientes...</div>
+            </div>
+        </div>
+
+        <div class="user-management-section">
+            <h2>Gestión de Usuarios</h2>
+            
+            <!-- Formulario para crear usuarios -->
+            <div class="create-user-section">
+                <h3>Crear Nuevo Usuario</h3>
+                <form id="createUserForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newUsername">Nombre de Usuario:</label>
+                            <input type="text" id="newUsername" name="username" required 
+                                   pattern="[a-zA-Z0-9_-]+" 
+                                   title="Solo letras, números, guiones y guiones bajos">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newPassword">Contraseña:</label>
+                            <input type="password" id="newPassword" name="password" required 
+                                   minlength="6" title="Mínimo 6 caracteres">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newName">Nombre Completo:</label>
+                            <input type="text" id="newName" name="name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userType">Tipo de Usuario:</label>
+                        <select id="userType" name="userType" required>
+                            <option value="">Seleccionar tipo...</option>
+                            <option value="client">Cliente</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="createUserBtn">Crear Usuario</button>
+                    
+                    <div class="loading" id="createUserLoading" style="display: none;">
+                        Creando usuario...
+                    </div>
+                    
+                    <div id="createUserMessage"></div>
+                </form>
+            </div>
+            
+            <!-- Lista de todos los usuarios -->
+            <div class="users-list-section">
+                <h3>Usuarios Existentes</h3>
+                <div id="usersList">
+                    <div class="loading">Cargando usuarios...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visor de archivos -->
+    <div class="files-viewer" id="filesViewer">
+        <button class="close-viewer" onclick="closeFilesViewer()">Cerrar</button>
+        <h2 id="filesViewerTitle">Archivos del Cliente</h2>
+        <div id="filesContainer"></div>
+    </div>
+
+    <script>
+        // Cargar clientes y usuarios al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadClients();
+            loadUsers();
+            
+            // Agregar event listener para el formulario de crear usuario
+            document.getElementById('createUserForm').addEventListener('submit', createUser);
+        });
+
+        async function loadClients() {
+            try {
+                const response = await fetch('/api/clients');
+                const clients = await response.json();
+                
+                // Llenar select de clientes
+                const clientSelect = document.getElementById('clientId');
+                clientSelect.innerHTML = '<option value="">Seleccionar cliente...</option>';
+                
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.id;
+                    option.textContent = client.name;
+                    clientSelect.appendChild(option);
+                });
+                
+                // Mostrar lista de clientes
+                const clientsList = document.getElementById('clientsList');
+                clientsList.innerHTML = '';
+                
+                clients.forEach(client => {
+                    const clientCard = document.createElement('div');
+                    clientCard.className = 'client-card';
+                    clientCard.innerHTML = `
+                        <div class="client-info">
+                            <h3>${client.name}</h3>
+                            <p>ID: ${client.id}</p>
+                        </div>
+                        <a href="#" class="view-files-btn" onclick="viewClientFiles('${client.id}')">Ver Archivos</a>
+                    `;
+                    clientsList.appendChild(clientCard);
+                });
+                
+            } catch (error) {
+                console.error('Error cargando clientes:', error);
+            }
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const uploadBtn = document.getElementById('uploadBtn');
+            const loading = document.getElementById('loading');
+            const message = document.getElementById('message');
+            
+            // Limpiar mensajes previos
+            message.innerHTML = '';
+            
+            // Mostrar loading
+            uploadBtn.disabled = true;
+            loading.style.display = 'block';
+            
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    message.innerHTML = '<div class="message success">Archivo subido exitosamente</div>';
+                    document.getElementById('uploadForm').reset();
+                } else {
+                    message.innerHTML = `<div class="message error">${result.message}</div>`;
+                }
+            } catch (error) {
+                message.innerHTML = '<div class="message error">Error al subir el archivo</div>';
+            } finally {
+                uploadBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+
+        async function viewClientFiles(clientId) {
+            try {
+                const response = await fetch(`/api/files/${clientId}`);
+                if (!response.ok) {
+                    throw new Error('Error al cargar archivos');
+                }
+                
+                const data = await response.json();
+                const files = data.files;
+                
+                // Obtener el nombre del cliente
+                const clientsResponse = await fetch('/api/clients');
+                const clientsData = await clientsResponse.json();
+                const clientName = clientsData.find(c => c.username === clientId)?.name || clientId;
+                
+                displayFiles(files, clientName, clientId);
+                
+                // Mostrar el visor de archivos
+                document.getElementById('filesViewer').style.display = 'block';
+                document.getElementById('filesViewer').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al cargar los archivos del cliente');
+            }
+        }
+        
+        function displayFiles(files, clientName, clientId) {
+            const filesContainer = document.getElementById('filesContainer');
+            const titleElement = document.getElementById('filesViewerTitle');
+            
+            titleElement.textContent = `Archivos de ${clientName}`;
+            
+            if (Object.keys(files).length === 0) {
+                filesContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">No hay documentos disponibles para este cliente</div>';
+                return;
+            }
+            
+            let html = '';
+            
+            Object.keys(files).sort((a, b) => b - a).forEach(year => {
+                html += `
+                    <div class="year-container">
+                        <div class="year-header" onclick="toggleYear('${year}')">
+                            <span>Año ${year}</span>
+                            <span id="arrow-${year}">▼</span>
+                        </div>
+                        <div class="year-content" id="year-${year}">
+                            <div class="months-grid">
+                `;
+                
+                Object.keys(files[year]).sort((a, b) => {
+                    const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                                  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                    return months.indexOf(b) - months.indexOf(a);
+                }).forEach(month => {
+                    html += `
+                        <div class="month-card">
+                            <h4>${month.charAt(0).toUpperCase() + month.slice(1)}</h4>
+                    `;
+                    
+                    files[year][month].forEach(file => {
+                        html += `
+                            <div class="file-item">
+                                <div class="file-info">
+                                    <div class="file-name">${file.name}</div>
+                                    <div class="file-date">Subido: ${new Date(file.uploadDate).toLocaleDateString('es-ES')}</div>
+                                </div>
+                                <div class="file-actions">
+                                    <a href="/download/${clientId}/${year}/${month}/${file.name}" 
+                                       class="download-btn" target="_blank">Descargar</a>
+                                    <button class="delete-file-btn" 
+                                            onclick="deleteFile('${clientId}', '${year}', '${month}', '${file.name}')"
+                                            title="Eliminar archivo">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                });
+                
+                html += '</div></div></div>';
+            });
+            
+            filesContainer.innerHTML = html;
+        }
+        
+        function toggleYear(year) {
+            const content = document.getElementById(`year-${year}`);
+            const arrow = document.getElementById(`arrow-${year}`);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                arrow.textContent = '▲';
+            }
+        }
+        
+        function closeFilesViewer() {
+            document.getElementById('filesViewer').style.display = 'none';
+        }
+
+        async function logout() {
+            try {
+                await fetch('/logout', { method: 'POST' });
+                window.location.href = '/login';
+            } catch (error) {
+                window.location.href = '/login';
+            }
+        }
+
+        // Funciones para gestión de usuarios
+        async function createUser(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const userData = {
+                username: formData.get('username'),
+                password: formData.get('password'),
+                name: formData.get('name'),
+                isAdmin: formData.get('userType') === 'admin'
+            };
+            
+            const createBtn = document.getElementById('createUserBtn');
+            const loading = document.getElementById('createUserLoading');
+            const message = document.getElementById('createUserMessage');
+            
+            // Limpiar mensajes previos
+            message.innerHTML = '';
+            
+            // Mostrar loading
+            createBtn.disabled = true;
+            loading.style.display = 'block';
+            
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    message.innerHTML = '<div class="message success">Usuario creado exitosamente</div>';
+                    document.getElementById('createUserForm').reset();
+                    loadUsers(); // Recargar lista de usuarios
+                    loadClients(); // Recargar lista de clientes
+                } else {
+                    message.innerHTML = `<div class="message error">${result.message}</div>`;
+                }
+            } catch (error) {
+                message.innerHTML = '<div class="message error">Error al crear el usuario</div>';
+            } finally {
+                createBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+        
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const usersList = document.getElementById('usersList');
+                    usersList.innerHTML = '';
+                    
+                    if (result.users.length === 0) {
+                        usersList.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">No hay usuarios registrados</div>';
+                        return;
+                    }
+                    
+                    result.users.forEach(user => {
+                        const userCard = document.createElement('div');
+                        userCard.className = 'user-card';
+                        userCard.innerHTML = `
+                            <div class="user-info">
+                                <h4>${user.name}</h4>
+                                <p>Usuario: ${user.username}</p>
+                                <span class="user-type ${user.isAdmin ? 'admin' : 'client'}">
+                                    ${user.isAdmin ? 'Administrador' : 'Cliente'}
+                                </span>
+                            </div>
+                            <button class="delete-user-btn" onclick="deleteUser('${user.username}')" 
+                                    ${user.username === 'admin' ? 'disabled title="No se puede eliminar el administrador principal"' : ''}>
+                                Eliminar
+                            </button>
+                        `;
+                        usersList.appendChild(userCard);
+                    });
+                } else {
+                    document.getElementById('usersList').innerHTML = '<div class="message error">Error al cargar usuarios</div>';
+                }
+            } catch (error) {
+                console.error('Error cargando usuarios:', error);
+                document.getElementById('usersList').innerHTML = '<div class="message error">Error al cargar usuarios</div>';
+            }
+        }
+        
+        async function deleteUser(username) {
+            if (!confirm(`¿Estás seguro de que quieres eliminar el usuario "${username}"?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/users/${username}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    loadUsers(); // Recargar lista de usuarios
+                    loadClients(); // Recargar lista de clientes
+                } else {
+                    alert(`Error al eliminar usuario: ${result.message}`);
+                }
+            } catch (error) {
+                alert('Error al eliminar el usuario');
+            }
+        }
+        
+        // Función para eliminar archivos
+        async function deleteFile(clientId, year, month, filename) {
+            if (!confirm(`¿Estás seguro de que quieres eliminar el archivo "${filename}"?\n\nEsta acción no se puede deshacer.`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/files/${clientId}/${year}/${month}/${encodeURIComponent(filename)}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Archivo eliminado exitosamente');
+                    // Recargar la vista de archivos del cliente actual
+                    const filesViewer = document.getElementById('filesViewer');
+                    if (filesViewer.style.display !== 'none') {
+                        // Buscar el nombre del cliente en el título
+                        const titleElement = document.getElementById('filesViewerTitle');
+                        const clientName = titleElement.textContent.replace('Archivos de ', '');
+                        viewClientFiles(clientId, clientName);
+                    }
+                } else {
+                    alert(`Error al eliminar archivo: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error eliminando archivo:', error);
+                alert('Error al eliminar el archivo');
+            }
+        }
+    </script>
+</body>
+</html>

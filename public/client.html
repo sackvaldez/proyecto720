@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Cliente - Caballero Solutions Power</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1e3c72;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .files-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .files-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .year-container {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .year-header {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .year-header:hover {
+            background: #2a5298;
+        }
+
+        .year-header h3 {
+            font-size: 18px;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .year-content {
+            display: none;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .year-content.active {
+            display: block;
+        }
+
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .month-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .month-card h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: capitalize;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+
+        .file-item:hover {
+            background: #f8f9fa;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .file-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+        }
+
+        .no-files {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .months-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .file-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Caballero Solutions Power</h1>
+        <div class="user-info">
+            <span id="userName">Cargando...</span>
+            <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h2>Bienvenido a su Portal de Documentos</h2>
+            <p>Aquí puede acceder y descargar todos sus documentos organizados por año y mes</p>
+        </div>
+
+        <div class="files-section">
+            <h2>Sus Documentos</h2>
+            <div id="filesContainer">
+                <div class="loading">Cargando documentos...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let viewingClient = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si se está viendo un cliente específico (para admin)
+            const urlParams = new URLSearchParams(window.location.search);
+            viewingClient = urlParams.get('view');
+            
+            loadUserInfo();
+            loadFiles();
+        });
+
+        async function loadUserInfo() {
+            try {
+                const response = await fetch('/api/user');
+                const user = await response.json();
+                currentUser = user;
+                
+                const userName = document.getElementById('userName');
+                if (viewingClient) {
+                    userName.textContent = `Viendo archivos de: ${viewingClient}`;
+                } else {
+                    userName.textContent = user.name;
+                }
+            } catch (error) {
+                console.error('Error cargando información del usuario:', error);
+                const userName = document.getElementById('userName');
+                userName.textContent = 'Usuario';
+            }
+        }
+
+        async function loadFiles() {
+            const filesContainer = document.getElementById('filesContainer');
+            
+            try {
+                // Esperar a que se cargue la información del usuario si no está disponible
+                if (!currentUser && !viewingClient) {
+                    await loadUserInfo();
+                }
+                
+                const clientId = viewingClient || currentUser.username;
+                const response = await fetch(`/api/files/${clientId}`);
+                
+                if (!response.ok) {
+                    throw new Error('Error al cargar archivos');
+                }
+                
+                const data = await response.json();
+                const files = data.files;
+                
+                if (Object.keys(files).length === 0) {
+                    filesContainer.innerHTML = '<div class="no-files">No hay documentos disponibles</div>';
+                    return;
+                }
+                
+                let html = '';
+                
+                // Ordenar años de mayor a menor
+                const sortedYears = Object.keys(files).sort((a, b) => b - a);
+                
+                sortedYears.forEach(year => {
+                    const yearFiles = files[year];
+                    const hasFiles = Object.values(yearFiles).some(monthFiles => monthFiles.length > 0);
+                    
+                    if (hasFiles) {
+                        html += `
+                            <div class="year-container">
+                                <div class="year-header" onclick="toggleYear('${year}')">
+                                    <h3>${year}</h3>
+                                    <span class="toggle-icon" id="icon-${year}">▼</span>
+                                </div>
+                                <div class="year-content" id="content-${year}">
+                                    <div class="months-grid">
+                        `;
+                        
+                        // Orden de meses
+                        const monthOrder = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                                          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                        
+                        monthOrder.forEach(month => {
+                            if (yearFiles[month] && yearFiles[month].length > 0) {
+                                html += `
+                                    <div class="month-card">
+                                        <h4>${month}</h4>
+                                `;
+                                
+                                yearFiles[month].forEach(file => {
+                                    const uploadDate = new Date(file.uploadDate).toLocaleDateString('es-ES');
+                                    const actualClientId = viewingClient || currentUser.username;
+                                    html += `
+                                        <div class="file-item">
+                                            <div class="file-info">
+                                                <div class="file-name">${file.originalName}</div>
+                                                <div class="file-date">Subido: ${uploadDate}</div>
+                                            </div>
+                                            <a href="/download/${actualClientId}/${year}/${month}/${file.name}" 
+                                               class="download-btn" target="_blank">Descargar</a>
+                                        </div>
+                                    `;
+                                });
+                                
+                                html += `</div>`;
+                            }
+                        });
+                        
+                        html += `
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                if (html === '') {
+                    filesContainer.innerHTML = '<div class="no-files">No hay documentos disponibles</div>';
+                } else {
+                    filesContainer.innerHTML = html;
+                }
+                
+            } catch (error) {
+                console.error('Error cargando archivos:', error);
+                filesContainer.innerHTML = '<div class="error">Error al cargar los documentos. Intente nuevamente.</div>';
+            }
+        }
+
+        function toggleYear(year) {
+            const content = document.getElementById(`content-${year}`);
+            const icon = document.getElementById(`icon-${year}`);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        }
+
+        async function logout() {
+            try {
+                await fetch('/logout', { method: 'POST' });
+                window.location.href = '/login';
+            } catch (error) {
+                window.location.href = '/login';
+            }
+        }
+    </script>
+</body>
+</html>
