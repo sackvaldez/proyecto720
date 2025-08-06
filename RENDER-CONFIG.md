@@ -20,11 +20,16 @@ Start Command: npm start
 # En Render Dashboard > Environment Variables
 NODE_ENV=production
 SESSION_SECRET=[Generar automáticamente en Render]
+ADMIN_PASSWORD=[Tu contraseña segura para admin]
+CLIENT1_PASSWORD=[Contraseña del Cliente 1]
+CLIENT2_PASSWORD=[Contraseña del Cliente 2]
 ```
 
 **⚠️ IMPORTANTE:** 
 - Usar "Generate" para SESSION_SECRET (más seguro)
+- ADMIN_PASSWORD debe ser una contraseña fuerte
 - No usar valores por defecto en producción
+- Las credenciales de prueba solo funcionan en desarrollo
 
 ### 3. Configuración de disco persistente
 

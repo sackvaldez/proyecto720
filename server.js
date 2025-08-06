@@ -105,33 +105,23 @@ function validatePath(userPath, basePath) {
 }
 
 // Base de datos simulada de clientes (en producción usar una base de datos real)
-const clients = {};
-
-// Credenciales de prueba (solo para desarrollo)
-if (process.env.NODE_ENV !== 'production') {
-    clients['admin'] = {
-        password: bcrypt.hashSync('admin123', 10),
-        isAdmin: true,
-        name: 'Administrador'
-    };
-    clients['cliente1'] = {
-        password: bcrypt.hashSync('pass123', 10),
-        isAdmin: false,
-        name: 'Cliente Ejemplo 1'
-    };
-    clients['cliente2'] = {
-        password: bcrypt.hashSync('pass456', 10),
-        isAdmin: false,
-        name: 'Cliente Ejemplo 2'
-    };
-} else {
-    // En producción, crear solo usuario admin por defecto
-    clients['admin'] = {
+const clients = {
+    'admin': {
         password: bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'admin123', 10),
         isAdmin: true,
         name: 'Administrador'
-    };
-}
+    },
+    'cliente1': {
+        password: bcrypt.hashSync(process.env.CLIENT1_PASSWORD || 'pass123', 10),
+        isAdmin: false,
+        name: 'Cliente Ejemplo 1'
+    },
+    'cliente2': {
+        password: bcrypt.hashSync(process.env.CLIENT2_PASSWORD || 'pass456', 10),
+        isAdmin: false,
+        name: 'Cliente Ejemplo 2'
+    }
+};
 
 // Configuración de multer para subida de archivos
 const storage = multer.diskStorage({
