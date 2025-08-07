@@ -111,15 +111,55 @@ const clients = {
         isAdmin: true,
         name: 'Administrador'
     },
-    'cliente1': {
-        password: bcrypt.hashSync(process.env.CLIENT1_PASSWORD || 'pass123', 10),
+    'plasman': {
+        password: bcrypt.hashSync(process.env.PLASMAN_PASSWORD || 'plasman123', 10),
         isAdmin: false,
-        name: 'Cliente Ejemplo 1'
+        name: 'PLASMAN'
     },
-    'cliente2': {
-        password: bcrypt.hashSync(process.env.CLIENT2_PASSWORD || 'pass456', 10),
+    'plasman2': {
+        password: bcrypt.hashSync(process.env.PLASMAN2_PASSWORD || 'plasman2123', 10),
         isAdmin: false,
-        name: 'Cliente Ejemplo 2'
+        name: 'PLASMAN PLANTA 2'
+    },
+    'rehrig': {
+        password: bcrypt.hashSync(process.env.REHRIG_PASSWORD || 'rehrig123', 10),
+        isAdmin: false,
+        name: 'REHRIG'
+    },
+    'martin': {
+        password: bcrypt.hashSync(process.env.MARTIN_PASSWORD || 'martin123', 10),
+        isAdmin: false,
+        name: 'MARTIN'
+    },
+    'fareva': {
+        password: bcrypt.hashSync(process.env.FAREVA_PASSWORD || 'fareva123', 10),
+        isAdmin: false,
+        name: 'FAREVA'
+    },
+    'givaudan': {
+        password: bcrypt.hashSync(process.env.GIVAUDAN_PASSWORD || 'givaudan123', 10),
+        isAdmin: false,
+        name: 'GIVAUDAN'
+    },
+    'philips': {
+        password: bcrypt.hashSync(process.env.PHILIPS_PASSWORD || 'philips123', 10),
+        isAdmin: false,
+        name: 'PHILIPS'
+    },
+    'indorama': {
+        password: bcrypt.hashSync(process.env.INDORAMA_PASSWORD || 'indorama123', 10),
+        isAdmin: false,
+        name: 'INDORAMA'
+    },
+    'stant': {
+        password: bcrypt.hashSync(process.env.STANT_PASSWORD || 'stant123', 10),
+        isAdmin: false,
+        name: 'STANT DE MEXICO'
+    },
+    'martin2': {
+        password: bcrypt.hashSync(process.env.MARTIN2_PASSWORD || 'martin2123', 10),
+        isAdmin: false,
+        name: 'MARTIN 2'
     }
 };
 

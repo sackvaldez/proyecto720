@@ -21,8 +21,16 @@ Start Command: npm start
 NODE_ENV=production
 SESSION_SECRET=[Generar automáticamente en Render]
 ADMIN_PASSWORD=[Tu contraseña segura para admin]
-CLIENT1_PASSWORD=[Contraseña del Cliente 1]
-CLIENT2_PASSWORD=[Contraseña del Cliente 2]
+PLASMAN_PASSWORD=[Contraseña de PLASMAN]
+PLASMAN2_PASSWORD=[Contraseña de PLASMAN PLANTA 2]
+REHRIG_PASSWORD=[Contraseña de REHRIG]
+MARTIN_PASSWORD=[Contraseña de MARTIN]
+FAREVA_PASSWORD=[Contraseña de FAREVA]
+GIVAUDAN_PASSWORD=[Contraseña de GIVAUDAN]
+PHILIPS_PASSWORD=[Contraseña de PHILIPS]
+INDORAMA_PASSWORD=[Contraseña de INDORAMA]
+STANT_PASSWORD=[Contraseña de STANT DE MEXICO]
+MARTIN2_PASSWORD=[Contraseña de MARTIN 2]
 ```
 
 **⚠️ IMPORTANTE:** 
