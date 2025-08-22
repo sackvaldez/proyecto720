@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
@@ -8,6 +9,8 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { body, param, validationResult } = require('express-validator');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -242,6 +245,7 @@ function requireAdmin(req, res, next) {
 }
 
 // Rutas
+// Ruta raíz - servir landing page
 app.get('/', (req, res) => {
     if (req.session.user) {
         if (req.session.user.isAdmin) {
@@ -250,8 +254,13 @@ app.get('/', (req, res) => {
             res.redirect('/client');
         }
     } else {
-        res.redirect('/login');
+        res.sendFile(path.join(__dirname, 'public', 'landing.html'));
     }
+});
+
+// Agregar después de la ruta raíz
+app.get('/landing', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'landing.html'));
 });
 
 app.get('/login', (req, res) => {
@@ -610,6 +619,137 @@ app.delete('/api/files/:clientId/:year/:month/:filename',
             res.status(500).json({ 
                 success: false, 
                 message: 'Error interno del servidor' 
+            });
+        }
+    }
+);
+
+// Función para crear transporter con OAuth2
+async function createGmailTransporter() {
+    try {
+        const OAuth2 = google.auth.OAuth2;
+        const oauth2Client = new OAuth2(
+            process.env.GMAIL_CLIENT_ID,
+            process.env.GMAIL_CLIENT_SECRET,
+            "https://developers.google.com/oauthplayground"
+        );
+
+        oauth2Client.setCredentials({
+            refresh_token: process.env.GMAIL_REFRESH_TOKEN
+        });
+
+        const accessToken = await new Promise((resolve, reject) => {
+            oauth2Client.getAccessToken((err, token) => {
+                if (err) {
+                    console.error('Error obteniendo access token:', err);
+                    reject(err);
+                }
+                resolve(token);
+            });
+        });
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: process.env.GMAIL_USER,
+                clientId: process.env.GMAIL_CLIENT_ID,
+                clientSecret: process.env.GMAIL_CLIENT_SECRET,
+                refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+                accessToken: accessToken
+            }
+        });
+
+        return transporter;
+    } catch (error) {
+        console.error('Error creando transporter OAuth2:', error);
+        throw error;
+    }
+}
+
+// Rate limiter específico para contacto
+const contactLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutos
+    max: 3, // máximo 3 mensajes por IP cada 15 minutos
+    message: { error: 'Demasiados mensajes enviados. Intenta de nuevo en 15 minutos.' },
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+// Endpoint de contacto
+app.post('/contact',
+    contactLimiter,
+    [
+        body('name')
+            .isLength({ min: 2, max: 100 })
+            .trim()
+            .escape()
+            .withMessage('El nombre debe tener entre 2 y 100 caracteres'),
+        body('email')
+            .isEmail()
+            .normalizeEmail()
+            .withMessage('Email inválido'),
+        body('phone')
+            .optional()
+            .isMobilePhone('any')
+            .withMessage('Teléfono inválido'),
+        body('message')
+            .isLength({ min: 10, max: 1000 })
+            .trim()
+            .escape()
+            .withMessage('El mensaje debe tener entre 10 y 1000 caracteres')
+    ],
+    handleValidationErrors,
+    async (req, res) => {
+        try {
+            const { name, email, phone, message } = req.body;
+            
+            // Configurar el email
+            const mailOptions = {
+                from: process.env.GMAIL_USER,
+                to: 'hector.rivera@caballerosolutionspower.com', // Email de destino
+                subject: `Nuevo mensaje de contacto - ${name}`,
+                html: `
+                    <h2>Nuevo mensaje de contacto</h2>
+                    <p><strong>Nombre:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Teléfono:</strong> ${phone || 'No proporcionado'}</p>
+                    <p><strong>Mensaje:</strong></p>
+                    <p>${message.replace(/\n/g, '<br>')}</p>
+                    <hr>
+                    <p><small>Enviado desde el formulario de contacto de la página web</small></p>
+                `,
+                replyTo: email
+            };
+            
+            // Verificar configuración OAuth2
+            if (!process.env.GMAIL_CLIENT_ID || !process.env.GMAIL_CLIENT_SECRET || !process.env.GMAIL_REFRESH_TOKEN) {
+                console.log('Configuración OAuth2 no encontrada. Simulando envío de email:');
+                console.log('De:', email);
+                console.log('Nombre:', name);
+                console.log('Teléfono:', phone);
+                console.log('Mensaje:', message);
+                
+                return res.json({ 
+                    success: true, 
+                    message: 'Mensaje recibido correctamente. Te contactaremos pronto.' 
+                });
+            }
+            
+            // Crear transporter y enviar el email
+            const transporter = await createGmailTransporter();
+            await transporter.sendMail(mailOptions);
+            
+            res.json({ 
+                success: true, 
+                message: 'Mensaje enviado correctamente. Te contactaremos pronto.' 
+            });
+            
+        } catch (error) {
+            console.error('Error al enviar email:', error);
+            res.status(500).json({ 
+                success: false, 
+                message: 'Error al enviar el mensaje. Por favor intenta de nuevo.' 
             });
         }
     }

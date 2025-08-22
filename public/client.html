@@ -13,6 +13,9 @@
     <meta name="description" content="Panel de cliente - Caballero Solutions Power">
     <meta name="author" content="Caballero Solutions">
     <meta name="theme-color" content="#2563eb">
+    
+    <!-- Client themes CSS -->
+    <link rel="stylesheet" href="/assets/client-themes.css">
     <style>
         * {
             margin: 0;
@@ -285,13 +288,48 @@
                 const userName = document.getElementById('userName');
                 if (viewingClient) {
                     userName.textContent = `Viendo archivos de: ${viewingClient}`;
+                    applyClientTheme(viewingClient);
                 } else {
                     userName.textContent = user.name;
+                    applyClientTheme(user.username);
                 }
             } catch (error) {
                 console.error('Error cargando información del usuario:', error);
                 const userName = document.getElementById('userName');
                 userName.textContent = 'Usuario';
+            }
+        }
+        
+        function applyClientTheme(username) {
+            // Remover temas existentes
+            document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
+            
+            // Aplicar tema específico del cliente
+            if (username && username !== 'admin') {
+                document.body.classList.add('client-theme', `theme-${username}`);
+                
+                // Personalizar el título de la página
+                const clientNames = {
+                    'plasman': 'PLASMAN',
+                    'plasman2': 'PLASMAN PLANTA 2',
+                    'rehrig': 'REHRIG',
+                    'martin': 'MARTIN',
+                    'fareva': 'FAREVA',
+                    'givaudan': 'GIVAUDAN',
+                    'philips': 'PHILIPS',
+                    'indorama': 'INDORAMA',
+                    'stant': 'STANT DE MEXICO',
+                    'martin2': 'MARTIN 2'
+                };
+                
+                const clientName = clientNames[username] || username.toUpperCase();
+                document.title = `${clientName} - Caballero Solutions Power`;
+                
+                // Personalizar mensaje de bienvenida
+                const welcomeSection = document.querySelector('.welcome-section h2');
+                if (welcomeSection) {
+                    welcomeSection.textContent = `Bienvenido ${clientName}`;
+                }
             }
         }
 

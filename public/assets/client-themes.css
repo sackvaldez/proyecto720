@@ -1,0 +1,196 @@
+/* Estilos personalizados para cada cliente */
+
+/* Tema base */
+.client-theme {
+    transition: all 0.3s ease;
+}
+
+/* PLASMAN */
+.theme-plasman {
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(30, 60, 114, 0.7)), 
+                url('/assets/clients/plasman.png') center/cover;
+}
+
+.theme-plasman .header {
+    background: rgba(30, 60, 114, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-plasman .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(30, 60, 114, 0.2);
+}
+
+/* PLASMAN PLANTA 2 */
+.theme-plasman2 {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/plasman2.png') center/cover;
+}
+
+.theme-plasman2 .header {
+    background: rgba(45, 85, 135, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-plasman2 .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(45, 85, 135, 0.2);
+}
+
+/* REHRIG */
+.theme-rehrig {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/rehrig.png') center/cover;
+}
+
+.theme-rehrig .header {
+    background: rgba(1, 56, 160, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-rehrig .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+/* MARTIN */
+.theme-martin {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/martinrea1.png') center/cover;
+}
+
+.theme-martin .header {
+    background: rgba(1, 56, 160, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-martin .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+/* FAREVA */
+.theme-fareva {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/fareva.png') center/cover;
+}
+
+.theme-fareva .header {
+    background: rgba(1, 56, 160, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-fareva .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+/* GIVAUDAN */
+.theme-givaudan {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/givaudan.png') center/cover;
+}
+
+.theme-givaudan .header {
+    background: rgba(1, 56, 160, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-givaudan .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(111, 66, 193, 0.2);
+}
+
+/* PHILIPS */
+.theme-philips {
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.9), rgba(0, 102, 204, 0.7)), 
+                url('/assets/clients/philips.png') center/cover;
+}
+
+.theme-philips .header {
+    background: rgba(0, 102, 204, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-philips .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 102, 204, 0.2);
+}
+
+/* INDORAMA */
+.theme-indorama {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.9), rgba(23, 162, 184, 0.7)), 
+                url('/assets/clients/indorama.png') center/cover;
+}
+
+.theme-indorama .header {
+    background: rgba(23, 162, 184, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-indorama .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(23, 162, 184, 0.2);
+}
+
+/* STANT DE MEXICO */
+.theme-stant {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/stant.png') center/cover;
+}
+
+.theme-stant .header {
+    background: rgba(0, 102, 204, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-stant .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(108, 117, 125, 0.2);
+}
+
+/* MARTIN 2 */
+.theme-martin2 {
+    background: linear-gradient(135deg, rgba(45, 85, 135, 0.9), rgba(45, 85, 135, 0.7)), 
+                url('/assets/clients/martin2.png') center/cover;
+}
+
+.theme-martin2 .header {
+    background: rgba(0, 102, 204, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.theme-martin2 .welcome-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(60, 179, 113, 0.2);
+}
+
+/* Efectos adicionales */
+.client-theme .files-section {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.client-theme .year-section {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .client-theme {
+        background-attachment: scroll;
+    }
+}

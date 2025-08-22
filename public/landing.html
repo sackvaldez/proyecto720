@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caballero Solutions Power - Soluciones Energéticas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/landing/icon1.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --primary-light: #2a2a2a;
+            --secondary: #dc2626;
+            --secondary-dark: #b91c1c;
+            --dark: #000000;
+            --light: #1f1f1f;
+            --gray: #9ca3af;
+            --text: #ffffff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+            background: #0f0f0f;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #000000;
+            box-shadow: 0 2px 15px rgba(220,38,38,0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            height: 40px; /* Ajusta según necesites */
+            width: auto;
+            color: #e20808; /* El SVG heredará este color */
+            transition: all 0.3s;
+        }
+        
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        .contact-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .contact-btn:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-top: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1624397640148-949b1732bb0a?ixlib=rb-4.0.3') no-repeat center center/cover;
+            opacity: 0.15;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-btn:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Voltage Section */
+        .voltage-section {
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            padding: 100px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voltage-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .voltage-content {
+            flex: 1;
+        }
+
+        .voltage-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .voltage-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .voltage-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .voltage-subtitle {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--secondary);
+        }
+
+        .voltage-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .voltage-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--secondary);
+        }
+
+        .voltage-btn:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Emergency Section */
+        .emergency-section {
+            background: #f8f9fa21;
+        }
+
+        .emergency-content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .emergency-text {
+            flex: 1;
+        }
+
+        .emergency-text h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .emergency-text h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .emergency-text p {
+            margin-bottom: 20px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .emergency-contact {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .emergency-bubble {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            border-radius: 25px;
+            padding: 30px;
+            color: white;
+            position: relative;
+            max-width: 350px;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3);
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .emergency-bubble:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.4);
+        }
+
+        .emergency-icon {
+            font-size: 2.5rem;
+            color: #fbbf24;
+            animation: pulse 2s infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .emergency-info h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .phone-btn, .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .phone-btn {
+            background: white;
+            color: #dc2626;
+            border-color: white;
+        }
+
+        .phone-btn:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .whatsapp-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .phone-btn i, .whatsapp-btn i {
+            font-size: 1.1rem;
+        }
+
+        .emergency-arrow {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #b91c1c;
+        }
+
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 25px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(220,38,38,0.2);
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--primary);
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(220,38,38,0.2);
+            transition: all 0.4s ease;
+            border-bottom: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(220,38,38,0.4);
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--gray);
+        }
+
+        /* Clients Section */
+        .clients-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .client-logo {
+            height: 120px;
+            max-width: 240px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+            background: rgba(224, 223, 223, 0.795);
+            padding: 8px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.05);
+            transition: all 0.3s;
+            background: rgb(255, 254, 254);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            padding: 100px 0;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-right: 15px;
+            min-width: 40px;
+            padding-top: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            background: rgba(255,255,255,0.9);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border: 2px solid var(--secondary);
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.2);
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: none;
+        }
+
+        .submit-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--secondary);
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Animation Elements */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content, 
+            .voltage-container {
+                flex-direction: column;
+            }
+            
+            .voltage-content, 
+            .voltage-image {
+                text-align: center;
+            }
+            
+            .voltage-btn {
+                margin-bottom: 30px;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .emergency-content-wrapper {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .emergency-text {
+                text-align: center;
+            }
+            
+            .emergency-bubble {
+                padding: 25px;
+            }
+            
+            .emergency-icon {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 12px 0;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                text-align: center;
+            }
+            
+            .voltage-title {
+                font-size: 2.2rem;
+            }
+            
+            .voltage-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .emergency-text h2 {
+                font-size: 2rem;
+            }
+            
+            .emergency-text h3 {
+                font-size: 1.5rem;
+            }
+            
+            .emergency-bubble {
+                margin: 0 20px;
+                padding: 20px 25px;
+            }
+            
+            .emergency-info h4 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .emergency-text h2 {
+                font-size: 1.8rem;
+            }
+            
+            .emergency-text h3 {
+                font-size: 1.3rem;
+            }
+            
+            .emergency-bubble {
+                margin: 0 15px;
+                padding: 20px;
+            }
+            
+            .emergency-info h4 {
+                font-size: 1.1rem;
+            }
+            
+            .phone-btn, .whatsapp-btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .voltage-title {
+                font-size: 1.8rem;
+            }
+            
+            .voltage-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="117.6" viewBox="0 0 512 117.6" fill="currentColor" class="logo w-auto h-full"><title>Caballero Solutions Power logotype alt</title><g class="logoalt-name"><path d="M511.6,54.1c-0.7-3.3-2.8-6.2-5.6-7.9c-3.7-2.1-7.8-3.2-12.1-3.5c-5.1-0.5-10.3-0.2-15.5,0.8 c-3.9,0.7-7.4,2.8-10,5.7c-1.4,1.9-2.3,4.2-2.5,6.6c-0.5,2.6-0.4,5.3,0.3,7.9c1.1,4.4,4.4,7.9,8.7,9.4c3.4,1.2,7,1.9,10.6,2 c1,0.1,1.9,0.1,3,0.1c3.9,0.2,7.8-0.2,11.5-1.2c3-0.7,5.7-2,7.9-4c2.5-2.3,3.9-5.5,4.1-9C512.1,58.6,512,56.3,511.6,54.1 L511.6,54.1z M498,65.9c-3.2,0.6-6.5,0.9-9.8,1c-2.1,0-4.1-0.1-6.2-0.2c-3.1-0.2-5.5-2.1-6.5-4.9c-0.3-1.7-0.3-3.5-0.1-5.2 c0.6-2.9,3-5,5.8-5.4c5-0.7,10-0.8,15.1-0.1c2.6,0.2,4.8,1.9,5.6,4.3c0.5,1.6,0.7,3.2,0.5,4.8C502.3,62.7,500.6,65.2,498,65.9 L498,65.9z"></path><path d="M420.4,50.8l6.1-8.2h23.3c3.2,0.3,6.3,1.3,9.1,3.1c2.5,1.7,4.1,4.5,4.4,7.5c0.3,3.1-0.8,6-3.1,8.3 c-1.6,1.3-3.3,2.3-5.3,3.1l10.1,10H452l-6.9-8.3h-15.4v8.3h-9.6v-16h29.3c1-0.1,1.9-0.5,2.8-1.1c0.7-0.6,1.1-1.5,1.1-2.4 s-0.3-1.8-1-2.5c-1.3-1-3-1.6-4.5-1.5h-27.5L420.4,50.8L420.4,50.8z"></path><polygon points="381.1,74.3 381.1,42.6 418,42.6 411.7,50.9 390.8,50.9 390.8,55.1 415.9,55.1 410.7,61.8 390.8,61.8 390.8,66.5 417.8,66.5 411.7,74.3"></polygon><polygon points="344.8,74.3 344.8,42.6 354.4,42.6 354.4,66.3 379,66.3 372.8,74.3"></polygon><polygon points="308.2,74.3 308.2,42.6 317.7,42.6 317.7,66.3 342.4,66.3 336.2,74.3"></polygon><path d="M252.7,74.3l21.2-29.7c1.3-1.6,3.3-2.5,5.3-2.5c2.1,0,4,0.9,5.3,2.5l20.8,29.7h-36.5l5.5-8.2h13.6l-8.7-12.7 l-14.9,20.9H252.7L252.7,74.3z"></path><path d="M250.3,61c-0.8-1.4-2.2-2.4-3.8-2.8c2.8-1.2,4.4-4,4.4-7s-1.6-5.6-4.2-6.9c-2.2-1.1-4.6-1.6-7-1.6h-22.3 l-6.6,8.3h29.1c1.1,0,2,0.8,2.1,1.9c0.1,1.1-1,2.1-2.1,2.3h-29.2v19.3h31c3.1,0,5.9-1.2,8.1-3.4C251.8,68.1,252,64.2,250.3,61 L250.3,61z M241.5,65.2c-0.4,0.7-1.1,1.1-1.9,1.1h-19.4v-4.5h19.4c0.8,0,1.5,0.4,1.9,1.1C241.9,63.6,241.9,64.6,241.5,65.2 L241.5,65.2z"></path><path d="M155.5,74.3l21.2-29.7c1.3-1.6,3.3-2.5,5.3-2.5c2.1,0,4,0.9,5.3,2.5l20.8,29.7h-36.5l5.5-8.2h13.6L182,53.5 l-14.9,20.9H155.5L155.5,74.3z"></path><path d="M155.5,42.6h-25.1c-4.4,0.5-8.7,2.4-11.9,5.4c-2.9,2.9-4.3,6.6-4.3,10.5s1.6,7.7,4.5,10.4 c3.2,3.1,7.3,4.9,11.6,5.3h19l6.3-8.2h-24.4c-4.1-0.1-7.4-3.5-7.3-7.7s3.7-7.4,7.8-7.5h17.6L155.5,42.6L155.5,42.6z"></path></g><g class="logoalt-mark"><path d="M2.8,6.8C10,17.6,19.7,26.7,30.9,33.2C48.7,43.4,69.8,46.8,90,42.6C74.8,50.3,59.7,58,44.7,65.9 c15.7-6.8,31.1-13.8,46.5-21c0,3.5-0.4,6.9-1.2,10.3c-13.9,7.5-27.8,15.1-41.5,22.9c13.2-6,26.4-12.1,39.7-18.2 c-0.6,4.2-2,8.2-3.8,11.9c-10.6,6-21.2,12.1-31.8,18.2c9.6-4.4,19.3-8.9,28.8-13.2c-0.6,3-1.9,5.9-3.6,8.3 c-1.6,2.3-3.2,4.4-4.9,6.6c-5.4,3.2-10.7,6.4-16.1,9.6c4.5-2,9.1-3.8,13.7-5.9c-5.9,8.7-13.2,16.1-21.7,22.1 c-7.2-3.7-12.4-10.5-14.4-18.4c-1.1-5.4-0.6-10.9,1.2-16.1c-3.7,3.6-5.6,8.9-5,14.1c-5.8-4.6-10-10.8-12.3-17.9 c-2-6.5-0.6-13.5,3.6-18.7c0.4-0.7,1.1-1.4,1.6-2c-4.9,2.2-8.4,6.7-9.1,12.1c-3.6-4-6.7-8.6-8.8-13.7C-0.8,41-1.7,23.3,2.8,6.8 L2.8,6.8z"></path><path d="M18.5,21.8c19.4,16.3,45,23.6,70.1,19.8c-5.3-1.5-10.2-3.9-14.7-7.2c-1.8-1.2-2.9-3-3.2-5 c-0.3-1.2,0.1-2.6,0.9-3.5c0.8-1,2-1.6,3.2-1.7c3.5,0.1,6.6,2.5,7.5,5.9c0,0.1,0.2,0.2,0.3,0.2c0.1,0,0.3-0.1,0.3-0.2 c2.8-5.5,2.6-12-0.7-17.2c-2.8-3.4-6.5-5.9-10.6-7.2c-4.6-5-11.7-6.9-18.1-4.7c0.9,1.1,1.6,2.2,2,3.5c0.2,0.7,0.1,1.4-0.3,2 c-0.1,0.2-0.3,0.3-0.4,0.3s-0.4-0.1-0.4-0.3c-4.1-1.5-8.8-1-12.2,1.6c3.1-0.3,6.2,0.2,9.1,1.4c1.2,0.4,2.1,1.3,2.8,2.4 c-3-1.7-6.4-2.6-9.8-2.6c-5.5,0.2-10.8,2.2-15.1,5.9c4.7-1,9.6-0.9,14.4,0.3c3.4,0.9,6.4,2.9,8.4,5.8c-4.5-3.2-9.8-5.1-15.5-5.3 c-5.6-0.3-11.1,1.2-16,4.2c6-0.7,12.2-0.2,18.1,1.6c4.2,1,7.9,3.9,10,7.9c0.4,0.8,0.8,1.6,1,2.5c-2.8-4.5-7-7.9-12.1-9.4 c-5.6-1.6-11.4-2-17-1.1C19.6,21.6,19,21.8,18.5,21.8L18.5,21.8z"></path></g></svg>
+        <ul class="nav-menu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Quiénes Somos</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="/login" class="contact-btn">Portal Clientes</a></li>
+        </ul>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content animate-on-scroll">
+                <h1>Soluciones energéticas para un futuro <span>sostenible</span></h1>
+                <p>Expertos en instalaciones eléctricas, energías renovables y eficiencia energética para empresas y hogares.</p>
+                <a href="#contacto" class="hero-btn">Solicitar Presupuesto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergencias" class="section emergency-section">
+        <div class="container">
+            <div class="emergency-content-wrapper">
+                <div class="emergency-text animate-on-scroll">
+                    <h2>Emergencias Eléctricas</h2>
+                    <h3><b>Servicio de Urgencias 24/7</b></h3>
+                    <p>¿Tienes una avería eléctrica urgente? Nuestro equipo especializado está disponible las 24 horas del día, los 7 días de la semana para resolver cualquier emergencia eléctrica.</p>
+                    <p>Contamos con técnicos certificados y equipos de última generación para garantizar una respuesta rápida y eficaz ante cualquier situación de emergencia.</p>
+                </div>
+                <div class="emergency-contact animate-on-scroll">
+                    <div class="emergency-bubble">
+                        <div class="emergency-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="emergency-info">
+                            <h4>¡COMUNÍCATE CON NOSOTROS!</h4>
+                            <div class="contact-options">
+                                <a href="tel:+34123456789" class="phone-btn">
+                                    <i class="fas fa-phone"></i>
+                                    (442) 237 9165
+                                </a>
+                                <a href="https://wa.me/524422379165?text=Hola,%20tengo%20una%20emergencia%20eléctrica" target="_blank" class="whatsapp-btn">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        <div class="emergency-arrow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voltage Section -->
+    <section class="voltage-section">
+        <div class="container">
+            <div class="voltage-container">
+                <div class="voltage-content animate-on-scroll">
+                    <h2 class="voltage-title">Baja la tensión</h2>
+                    <h3 class="voltage-subtitle">Déjanos la alta</h3>
+                    <p class="voltage-text">Desde instalaciones en baja tensión hasta proyectos en alta tensión, nuestro equipo altamente capacitado y comprometido se encarga de cada detalle.</p>
+                    <a href="#contacto" class="voltage-btn">Contáctanos</a>
+                </div>
+                <div class="voltage-image animate-on-scroll">
+                    <img src="assets/landing/imagen1.webp" alt="Instalaciones eléctricas">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Quiénes Somos</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <h3>Caballero Solutions Power</h3>
+                    <p>Somos una empresa especializada en soluciones energéticas con más de 15 años de experiencia en el sector. Nuestro compromiso es ofrecer servicios de calidad que garanticen la máxima eficiencia y seguridad en todas nuestras instalaciones.</p>
+                    <p>Contamos con un equipo de profesionales altamente cualificados que trabajan con las últimas tecnologías para satisfacer las necesidades energéticas de nuestros clientes, tanto en el ámbito residencial como industrial.</p>
+                    <p>Nuestra filosofía se basa en la innovación, la calidad y el compromiso con el medio ambiente, promoviendo siempre el uso de energías renovables y soluciones sostenibles.</p>
+                </div>
+                <div class="about-image animate-on-scroll">
+                    <img src="assets/landing/imagen2.webp" alt="Equipo de trabajo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="section services">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Nuestros Servicios</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <h3>Energías Renovables</h3>
+                    <p>Instalación de paneles solares fotovoltaicos, sistemas térmicos y soluciones de autoconsumo energético.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instalaciones Eléctricas</h3>
+                    <p>Diseño e implementación de instalaciones eléctricas para viviendas, locales comerciales e industrias.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Eficiencia Energética</h3>
+                    <p>Auditorías energéticas y soluciones personalizadas para reducir el consumo y optimizar recursos.</p>
+                </div>
+                <!-- <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-car-battery"></i>
+                    </div>
+                    <h3>Puntos de Carga</h3>
+                    <p>Instalación de puntos de recarga para vehículos eléctricos en viviendas, comunidades y empresas.</p>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clientes" class="section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Nuestros Clientes</h2>
+            </div>
+            <div class="clients-logos">
+                <img src="./assets/landing/cnh.png" alt="Cliente 1" class="client-logo animate-on-scroll">
+                <img src="./assets/landing/cemex.png" alt="Cliente 2" class="client-logo animate-on-scroll">
+                <img src="./assets/landing/condumex.svg" alt="Cliente 3" class="client-logo animate-on-scroll">
+                <img src="./assets/landing/siemens.png" alt="Cliente 4" class="client-logo animate-on-scroll">
+                <img src="./assets/landing/philips.png" alt="Cliente 5" class="client-logo animate-on-scroll">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Contacto</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Dirección</h3>
+                            <p>Calle Adolfo López Mateos 71, San Pablo, 766159 Santiago de Querétaro, Qro.</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Teléfono</h3>
+                            <p>(442) 243 2453</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>auxung@caballerosolutionspower.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Horario</h3>
+                            <p>Lunes a Viernes: 8:00 - 17:00</p>
+                            <!-- <p>Sábados: 9:00 - 13:00</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form animate-on-scroll">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="form-control" placeholder="Teléfono">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-control" placeholder="Mensaje" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="117.6" viewBox="0 0 512 117.6" fill="currentColor" class="logo w-auto h-full"><title>Caballero Solutions Power logotype alt</title><g class="logoalt-name"><path d="M511.6,54.1c-0.7-3.3-2.8-6.2-5.6-7.9c-3.7-2.1-7.8-3.2-12.1-3.5c-5.1-0.5-10.3-0.2-15.5,0.8 c-3.9,0.7-7.4,2.8-10,5.7c-1.4,1.9-2.3,4.2-2.5,6.6c-0.5,2.6-0.4,5.3,0.3,7.9c1.1,4.4,4.4,7.9,8.7,9.4c3.4,1.2,7,1.9,10.6,2 c1,0.1,1.9,0.1,3,0.1c3.9,0.2,7.8-0.2,11.5-1.2c3-0.7,5.7-2,7.9-4c2.5-2.3,3.9-5.5,4.1-9C512.1,58.6,512,56.3,511.6,54.1 L511.6,54.1z M498,65.9c-3.2,0.6-6.5,0.9-9.8,1c-2.1,0-4.1-0.1-6.2-0.2c-3.1-0.2-5.5-2.1-6.5-4.9c-0.3-1.7-0.3-3.5-0.1-5.2 c0.6-2.9,3-5,5.8-5.4c5-0.7,10-0.8,15.1-0.1c2.6,0.2,4.8,1.9,5.6,4.3c0.5,1.6,0.7,3.2,0.5,4.8C502.3,62.7,500.6,65.2,498,65.9 L498,65.9z"></path><path d="M420.4,50.8l6.1-8.2h23.3c3.2,0.3,6.3,1.3,9.1,3.1c2.5,1.7,4.1,4.5,4.4,7.5c0.3,3.1-0.8,6-3.1,8.3 c-1.6,1.3-3.3,2.3-5.3,3.1l10.1,10H452l-6.9-8.3h-15.4v8.3h-9.6v-16h29.3c1-0.1,1.9-0.5,2.8-1.1c0.7-0.6,1.1-1.5,1.1-2.4 s-0.3-1.8-1-2.5c-1.3-1-3-1.6-4.5-1.5h-27.5L420.4,50.8L420.4,50.8z"></path><polygon points="381.1,74.3 381.1,42.6 418,42.6 411.7,50.9 390.8,50.9 390.8,55.1 415.9,55.1 410.7,61.8 390.8,61.8 390.8,66.5 417.8,66.5 411.7,74.3"></polygon><polygon points="344.8,74.3 344.8,42.6 354.4,42.6 354.4,66.3 379,66.3 372.8,74.3"></polygon><polygon points="308.2,74.3 308.2,42.6 317.7,42.6 317.7,66.3 342.4,66.3 336.2,74.3"></polygon><path d="M252.7,74.3l21.2-29.7c1.3-1.6,3.3-2.5,5.3-2.5c2.1,0,4,0.9,5.3,2.5l20.8,29.7h-36.5l5.5-8.2h13.6l-8.7-12.7 l-14.9,20.9H252.7L252.7,74.3z"></path><path d="M250.3,61c-0.8-1.4-2.2-2.4-3.8-2.8c2.8-1.2,4.4-4,4.4-7s-1.6-5.6-4.2-6.9c-2.2-1.1-4.6-1.6-7-1.6h-22.3 l-6.6,8.3h29.1c1.1,0,2,0.8,2.1,1.9c0.1,1.1-1,2.1-2.1,2.3h-29.2v19.3h31c3.1,0,5.9-1.2,8.1-3.4C251.8,68.1,252,64.2,250.3,61 L250.3,61z M241.5,65.2c-0.4,0.7-1.1,1.1-1.9,1.1h-19.4v-4.5h19.4c0.8,0,1.5,0.4,1.9,1.1C241.9,63.6,241.9,64.6,241.5,65.2 L241.5,65.2z"></path><path d="M155.5,74.3l21.2-29.7c1.3-1.6,3.3-2.5,5.3-2.5c2.1,0,4,0.9,5.3,2.5l20.8,29.7h-36.5l5.5-8.2h13.6L182,53.5 l-14.9,20.9H155.5L155.5,74.3z"></path><path d="M155.5,42.6h-25.1c-4.4,0.5-8.7,2.4-11.9,5.4c-2.9,2.9-4.3,6.6-4.3,10.5s1.6,7.7,4.5,10.4 c3.2,3.1,7.3,4.9,11.6,5.3h19l6.3-8.2h-24.4c-4.1-0.1-7.4-3.5-7.3-7.7s3.7-7.4,7.8-7.5h17.6L155.5,42.6L155.5,42.6z"></path></g><g class="logoalt-mark"><path d="M2.8,6.8C10,17.6,19.7,26.7,30.9,33.2C48.7,43.4,69.8,46.8,90,42.6C74.8,50.3,59.7,58,44.7,65.9 c15.7-6.8,31.1-13.8,46.5-21c0,3.5-0.4,6.9-1.2,10.3c-13.9,7.5-27.8,15.1-41.5,22.9c13.2-6,26.4-12.1,39.7-18.2 c-0.6,4.2-2,8.2-3.8,11.9c-10.6,6-21.2,12.1-31.8,18.2c9.6-4.4,19.3-8.9,28.8-13.2c-0.6,3-1.9,5.9-3.6,8.3 c-1.6,2.3-3.2,4.4-4.9,6.6c-5.4,3.2-10.7,6.4-16.1,9.6c4.5-2,9.1-3.8,13.7-5.9c-5.9,8.7-13.2,16.1-21.7,22.1 c-7.2-3.7-12.4-10.5-14.4-18.4c-1.1-5.4-0.6-10.9,1.2-16.1c-3.7,3.6-5.6,8.9-5,14.1c-5.8-4.6-10-10.8-12.3-17.9 c-2-6.5-0.6-13.5,3.6-18.7c0.4-0.7,1.1-1.4,1.6-2c-4.9,2.2-8.4,6.7-9.1,12.1c-3.6-4-6.7-8.6-8.8-13.7C-0.8,41-1.7,23.3,2.8,6.8 L2.8,6.8z"></path><path d="M18.5,21.8c19.4,16.3,45,23.6,70.1,19.8c-5.3-1.5-10.2-3.9-14.7-7.2c-1.8-1.2-2.9-3-3.2-5 c-0.3-1.2,0.1-2.6,0.9-3.5c0.8-1,2-1.6,3.2-1.7c3.5,0.1,6.6,2.5,7.5,5.9c0,0.1,0.2,0.2,0.3,0.2c0.1,0,0.3-0.1,0.3-0.2 c2.8-5.5,2.6-12-0.7-17.2c-2.8-3.4-6.5-5.9-10.6-7.2c-4.6-5-11.7-6.9-18.1-4.7c0.9,1.1,1.6,2.2,2,3.5c0.2,0.7,0.1,1.4-0.3,2 c-0.1,0.2-0.3,0.3-0.4,0.3s-0.4-0.1-0.4-0.3c-4.1-1.5-8.8-1-12.2,1.6c3.1-0.3,6.2,0.2,9.1,1.4c1.2,0.4,2.1,1.3,2.8,2.4 c-3-1.7-6.4-2.6-9.8-2.6c-5.5,0.2-10.8,2.2-15.1,5.9c4.7-1,9.6-0.9,14.4,0.3c3.4,0.9,6.4,2.9,8.4,5.8c-4.5-3.2-9.8-5.1-15.5-5.3 c-5.6-0.3-11.1,1.2-16,4.2c6-0.7,12.2-0.2,18.1,1.6c4.2,1,7.9,3.9,10,7.9c0.4,0.8,0.8,1.6,1,2.5c-2.8-4.5-7-7.9-12.1-9.4 c-5.6-1.6-11.4-2-17-1.1C19.6,21.6,19,21.8,18.5,21.8L18.5,21.8z"></path></g></svg>
+                    <p>Soluciones energéticas innovadoras para un futuro más sostenible y eficiente.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <p>Energías Renovables</p>
+                    <p>Instalaciones Eléctricas</p>
+                    <p>Eficiencia Energética</p>
+                    <p>Puntos de Carga</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <p><a href="#inicio" style="color: #bbb; text-decoration: none;">Inicio</a></p>
+                    <p><a href="#nosotros" style="color: #bbb; text-decoration: none;">Quiénes Somos</a></p>
+                    <p><a href="#servicios" style="color: #bbb; text-decoration: none;">Servicios</a></p>
+                    <p><a href="#contacto" style="color: #bbb; text-decoration: none;">Contacto</a></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Caballero Solutions Power. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                navMenu.classList.remove('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                header.style.padding = '5px 0';
+                document.querySelector('.logo').style.height = '50px';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
+                header.style.padding = '15px 0';
+                document.querySelector('.logo').style.height = '60px';
+            }
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight * 0.8;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Contact form handling
+        const contactForm = document.querySelector('.contact-form form');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const name = contactForm.querySelector('input[placeholder="Nombre completo"]').value;
+            const email = contactForm.querySelector('input[placeholder="Email"]').value;
+            const phone = contactForm.querySelector('input[placeholder="Teléfono"]').value;
+            const message = contactForm.querySelector('textarea[placeholder="Mensaje"]').value;
+            
+            // Validate required fields
+            if (!name || !email || !message) {
+                alert('Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        message: message
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('¡Mensaje enviado exitosamente! Te contactaremos pronto.');
+                    contactForm.reset();
+                } else {
+                    alert(result.message || 'Error al enviar el mensaje. Por favor, intenta nuevamente.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión. Por favor, verifica tu conexión a internet e intenta nuevamente.');
+            } finally {
+                // Restore submit button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
